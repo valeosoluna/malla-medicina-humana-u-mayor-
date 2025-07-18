@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malla Curricular Medicina Humana</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Malla Curricular Medicina Humana</h1>
+        <div class="theme-toggle" role="switch" aria-checked="false" aria-label="Toggle dark and light mode" tabindex="0">
+            <span class="theme-toggle-icon light" data-tooltip="Activar Modo Claro">☀️</span>
+            <span class="theme-toggle-icon dark" data-tooltip="Activar Modo Oscuro">🌙</span>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <span class="progress-text" id="progressText">0%</span>
+        </div>
+        <div class="average-grade-container">
+            <span class="average-grade-text" id="averageGradeText">Promedio de ramos aprobados: N/A</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="semesters-container" id="semestersContainer">
+        </div>
+    </div>
+
+    <div class="recommendations-container">
+        <h2>Ramos Sugeridos (No aplica prerrequisitos)</h2>
+        <div id="recommendedCourses">
+        </div>
+        <button id="refreshRecommendations" data-tooltip="Actualiza la lista de ramos sugeridos">Actualizar Sugerencias</button>
+    </div>
+
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" data-tooltip="Cerrar ventana">&times;</span>
+            <h2 id="modalCourseName"></h2>
+            <p><strong>Semestre:</strong> <span id="modalCourseSemester"></span></p>
+            <p><strong>Área:</strong> <span id="modalCourseArea"></span></p>
+            <p><strong>Descripción:</strong> <span id="modalCourseDescription"></span></p>
+            <button id="markAsApprovedBtn" class="modal-button approve" data-tooltip="Marcar este ramo como aprobado y asignar una nota">Marcar como Aprobado</button>
+            <button class="modal-button close" data-tooltip="Cerrar ventana">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
