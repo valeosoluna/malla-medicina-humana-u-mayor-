@@ -1,0 +1,598 @@
+/* style.css */
+
+/* Define Variables CSS para Modo Claro */
+body.light-mode {
+    --bg-color: #FFF0F5; /* LavenderBlush - un rosa muy claro y suave */
+    --text-color: #333;
+    --header-color: #333;
+    --progress-bg-color: #E0E0E0; /* Fondo de la barra de progreso */
+    --progress-empty-color: #FFC0CB; /* Rosado pastel inicial para el progreso */
+    --progress-fill-color: #EE82EE; /* Violet - morado pastel para el progreso */
+    --average-grade-bg: #F8F8FF; /* GhostWhite - fondo muy claro */
+    --average-grade-text-color: #8A2BE2; /* BlueViolet - morado vibrante */
+    --semesters-bg-color: #fff;
+    --semester-column-bg: #F8F8FF; /* GhostWhite - Fondo de la columna del semestre */
+    --semester-text-color: #6c757d;
+    --course-box-default-bg: #FFC0CB; /* Pink - Rosado pastel para ramos no aprobados/disponibles */
+    --course-box-approved-bg: #EE82EE; /* Violet - Morado pastel más oscuro para aprobado */
+    --course-box-blocked-bg: #E6E6FA; /* Lavender - Morado grisáceo muy claro para bloqueado (aunque no se usará) */
+    --course-box-blocked-text: #666;
+    --recommendations-bg-color: #fff;
+    --recommendations-title-color: #8A2BE2; /* BlueViolet - morado vibrante para el título */
+    --recommended-course-bg: #BA55D3; /* MediumOrchid - un morado pastel distinto para recomendaciones */
+    --refresh-button-bg: #EE82EE;
+    --refresh-button-hover-bg: #BA55D3;
+    --modal-bg-color: rgba(0, 0, 0, 0.5);
+    --modal-content-bg: #fff;
+    --modal-text-color: #333;
+    --modal-button-approve-bg: #EE82EE;
+    --modal-button-approve-hover-bg: #BA55D3;
+    --modal-button-close-bg: #6c757d;
+    --modal-button-close-hover-bg: #5a6268;
+    --tooltip-bg: #333;
+    --tooltip-text: #fff;
+    --toggle-button-bg: #E0E0E0;
+    --toggle-icon-color-light: #FFD700; /* Gold para sol */
+    --toggle-icon-color-dark: #ADD8E6; /* Light Blue para luna */
+}
+
+/* Define Variables CSS para Modo Oscuro */
+body.dark-mode {
+    --bg-color: #2c2c2c; /* Gris oscuro para el fondo */
+    --text-color: #e0e0e0; /* Gris claro para el texto */
+    --header-color: #f0f0f0;
+    --progress-bg-color: #555;
+    --progress-empty-color: #777;
+    --progress-fill-color: #9370DB; /* MediumPurple */
+    --average-grade-bg: #444;
+    --average-grade-text-color: #BA55D3; /* MediumOrchid */
+    --semesters-bg-color: #3c3c3c;
+    --semester-column-bg: #444;
+    --semester-text-color: #bbb;
+    --course-box-default-bg: #555;
+    --course-box-approved-bg: #9370DB; /* MediumPurple */
+    --course-box-blocked-bg: #666; /* Aunque no se usará, lo mantengo */
+    --course-box-blocked-text: #aaa;
+    --recommendations-bg-color: #3c3c3c;
+    --recommendations-title-color: #BA55D3; /* MediumOrchid */
+    --recommended-course-bg: #8A2BE2; /* BlueViolet */
+    --refresh-button-bg: #9370DB;
+    --refresh-button-hover-bg: #8A2BE2;
+    --modal-bg-color: rgba(0, 0, 0, 0.7);
+    --modal-content-bg: #444;
+    --modal-text-color: #e0e0e0;
+    --modal-button-approve-bg: #9370DB;
+    --modal-button-approve-hover-bg: #8A2BE2;
+    --modal-button-close-bg: #888;
+    --modal-button-close-hover-bg: #777;
+    --tooltip-bg: #eee;
+    --tooltip-text: #333;
+    --toggle-button-bg: #666;
+    --toggle-icon-color-light: #eee; /* Light color para luna */
+    --toggle-icon-color-dark: #FFD700; /* Gold para sol */
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    line-height: 1.6;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.header h1 {
+    color: var(--header-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 2.2em;
+}
+
+/* Botón de Modo Oscuro/Claro */
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 60px;
+    height: 30px;
+    background-color: var(--toggle-button-bg);
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.theme-toggle-icon.light {
+    color: var(--toggle-icon-color-light);
+    opacity: 1;
+}
+
+.theme-toggle-icon.dark {
+    color: var(--toggle-icon-color-dark);
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+body.dark-mode .theme-toggle-icon.light {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+body.dark-mode .theme-toggle-icon.dark {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+.progress-container {
+    width: 80%;
+    max-width: 800px;
+    background-color: var(--progress-bg-color);
+    border-radius: 5px;
+    margin: 20px auto 10px auto;
+    height: 30px;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--progress-empty-color);
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    transition: width 0.7s ease-in-out, background-color 0.7s ease;
+}
+
+.progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    line-height: 30px;
+    font-weight: bold;
+    color: var(--text-color);
+    text-shadow: 0 0 2px rgba(0,0,0,0.1);
+}
+
+.average-grade-container {
+    margin-top: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--average-grade-text-color);
+    background-color: var(--average-grade-bg);
+    padding: 8px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+.average-grade-text {
+    color: var(--average-grade-text-color);
+    transition: color 0.5s ease;
+}
+
+
+.main-content {
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+.semesters-container {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--semesters-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    min-width: fit-content;
+    transition: background-color 0.5s ease;
+    flex-wrap: nowrap;
+}
+
+.semester {
+    flex-shrink: 0;
+    width: 200px;
+    background-color: var(--semester-column-bg);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    color: var(--semester-text-color);
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.semester h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 1.3em;
+    transition: color 0.5s ease;
+}
+
+.courses-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.course-box {
+    background-color: var(--course-box-default-bg);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    border: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    line-height: 1.3;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.course-box:hover:not(.approved):not(.blocked) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.course-box.clicked {
+    animation: click-animation 0.3s forwards;
+}
+
+@keyframes click-animation {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+
+/* Colores de borde por área (pasteles) */
+.course-box.Básica {
+    border-color: #ADD8E6; /* LightBlue - Azul claro pastel */
+}
+.course-box.Disciplinar {
+    border-color: #98FB98; /* PaleGreen - Verde pálido pastel */
+}
+.course-box.Electiva {
+    border-color: #FFDAB9; /* PeachPuff - Durazno pastel */
+}
+
+/* Colores de borde de área en Modo Oscuro */
+body.dark-mode .course-box.Básica {
+    border-color: #6A5ACD; /* SlateBlue */
+}
+body.dark-mode .course-box.Disciplinar {
+    border-color: #3CB371; /* MediumSeaGreen */
+}
+body.dark-mode .course-box.Electiva {
+    border-color: #FF7F50; /* Coral */
+}
+
+
+.course-box.approved {
+    background-color: var(--course-box-approved-bg);
+    text-decoration: line-through;
+    cursor: default;
+    color: white;
+}
+
+.course-box.blocked {
+    background-color: var(--course-box-blocked-bg); /* Este estilo no se activará con la nueva lógica */
+    color: var(--course-box-blocked-text);
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Recomendaciones */
+.recommendations-container {
+    background-color: var(--recommendations-bg-color);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-top: 40px;
+    text-align: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.recommendations-container h2 {
+    color: var(--recommendations-title-color);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    transition: color 0.5s ease;
+}
+
+#recommendedCourses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+#recommendedCourses .course-box {
+    background-color: var(--recommended-course-bg);
+    color: white;
+    cursor: default;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-decoration: none;
+    border-color: var(--recommended-course-bg);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+#refreshRecommendations {
+    padding: 12px 25px;
+    background-color: var(--refresh-button-bg);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#refreshRecommendations:hover {
+    background-color: var(--refresh-button-hover-bg);
+    transform: translateY(-1px);
+}
+
+#refreshRecommendations:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Estilos del Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-bg-color);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--modal-content-bg);
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: left;
+    color: var(--modal-text-color);
+    animation: fade-in 0.3s ease-out;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    color: var(--modal-text-color);
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #f00;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    color: var(--average-grade-text-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.modal-content strong {
+    color: var(--text-color);
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.modal-button.approve {
+    background-color: var(--modal-button-approve-bg);
+    color: white;
+    margin-right: 10px;
+}
+
+.modal-button.approve:hover {
+    background-color: var(--modal-button-approve-hover-bg);
+    transform: translateY(-1px);
+}
+.modal-button.approve:active {
+    transform: translateY(0);
+}
+
+.modal-button.close {
+    background-color: var(--modal-button-close-bg);
+    color: white;
+}
+
+.modal-button.close:hover {
+    background-color: var(--modal-button-close-hover-bg);
+    transform: translateY(-1px);
+}
+.modal-button.close:active {
+    transform: translateY(0);
+}
+
+/* Tooltips */
+.tooltip {
+    position: absolute;
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    white-space: nowrap;
+    z-index: 1001;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Media Queries para Diseño Responsive */
+@media (max-width: 1024px) {
+    .semesters-container {
+        padding: 10px;
+        gap: 10px;
+    }
+    .semester {
+        width: 170px;
+        padding: 12px;
+    }
+    .course-box {
+        padding: 10px;
+        min-height: 45px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    .header h1 {
+        font-size: 1.8em;
+    }
+    .progress-container {
+        width: 95%;
+    }
+    .semesters-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .semester {
+        width: 45%;
+        min-width: 150px;
+        font-size: 0.9em;
+    }
+    .course-box {
+        font-size: 0.85em;
+        min-height: 40px;
+    }
+    .recommendations-container {
+        padding: 20px;
+    }
+    .recommendations-container h2 {
+        font-size: 1.5em;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .header h1 {
+        font-size: 1.5em;
+        line-height: 1.2;
+    }
+    .theme-toggle {
+        top: 5px;
+        right: 10px;
+        width: 50px;
+        height: 25px;
+    }
+    .theme-toggle-icon {
+        font-size: 1em;
+    }
+    .progress-container, .average-grade-container {
+        font-size: 0.9em;
+    }
+    .semester {
+        width: 90%;
+        min-width: unset;
+    }
+    .course-box {
+        padding: 8px;
+        min-height: 35px;
+        font-size: 0.8em;
+    }
+    #refreshRecommendations {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    .modal-content h2 {
+        font-size: 1.4em;
+    }
+    .modal-content p {
+        font-size: 0.95em;
+    }
+    .modal-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .tooltip {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+}
